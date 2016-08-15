@@ -1,0 +1,49 @@
+version: '2'
+services:
+  git:
+    image: unixtastic/git-ssh-server
+    ports:
+    - "443:443"
+    - "2222:22"
+    volumes:
+    - .:/code
+  # ci:
+  #   image: jenkins:2.7.2
+  ansible-ci:
+    build: ansible-ci/.
+    links:
+    - git
+    - load
+    - front1
+    - front2
+    - middle1
+    - middle2
+    - backend
+    # image: ansible/centos7-ansible
+  load:
+    image: centos:7
+    links: 
+    - front1
+    - front2
+  front1:
+    image: centos:7
+    links: 
+    - middle1
+    - middle2
+  front2:
+    image: centos:7
+    links: 
+    - middle1
+    - middle2
+  middle1:
+    image: centos:7
+    links: 
+    - backend
+  middle2:
+    image: centos:7
+    links: 
+    - backend
+  backend:
+    image: centos:7
+
+
