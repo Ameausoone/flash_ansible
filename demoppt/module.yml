@@ -1,0 +1,4 @@
+
+- name: Ensure httpd is installed.
+  yum: name= "httpd"
+       state= present

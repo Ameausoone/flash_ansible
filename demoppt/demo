@@ -1,0 +1,13 @@
+.
+|-- defaults
+    `-- main.yml
+|-- files
+    `-- epel.key
+|-- handlers
+    `-- main.yml
+|-- tasks
+    `-- main.yml
+|-- templates
+    `-- httpd.conf.nj2
+|-- vars
+    `-- main.yml

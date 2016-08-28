@@ -1,3 +1,9 @@
+
+[myenvironment:children]
+front
+middle
+backend
+
 [front]
 front1
 front2
@@ -8,3 +14,5 @@ middle2
 
 [backend]
 backend
+
+

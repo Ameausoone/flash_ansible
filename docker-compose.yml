@@ -3,14 +3,20 @@ services:
   git:
     image: unixtastic/git-ssh-server
     ports:
-    - "443:443"
+    # - "443:443"
     - "2222:22"
     volumes:
     - .:/code
-  # ci:
-  #   image: jenkins:2.7.2
-  ansible-ci:
-    build: ansible-ci/.
+    container_name: git
+  ci:
+    image: jenkins:2.7.2
+    links:
+    - ansible
+    ports:
+    - "8080:8080"
+    container_name: ci
+  ansible:
+    build: ansible/.
     links:
     - git
     - load
@@ -20,30 +26,60 @@ services:
     - middle2
     - backend
     # image: ansible/centos7-ansible
+    # volumes:
+    # - playbook:/playbook
+    command: tail -F /var/log/test
+    container_name: ansible
   load:
-    image: centos:7
+    # image: centos:7
+    build: centos7_with_ssh/.
     links: 
     - front1
     - front2
+    # command: tail -F /var/log/test
+    expose:
+    - "22"
+    container_name: load
   front1:
-    image: centos:7
+    build: centos7_with_ssh/.
     links: 
     - middle1
     - middle2
+    expose:
+    - "22"
+    # command: tail -F /var/log/test
+    container_name: front1
   front2:
-    image: centos:7
+    build: centos7_with_ssh/.
     links: 
     - middle1
     - middle2
+    expose:
+    - "22"
+    container_name: front2
+    # command: tail -F /var/log/test
   middle1:
-    image: centos:7
+    build: centos7_with_ssh/.
     links: 
     - backend
+    expose:
+    - "22"
+    container_name: middle1
+    # command: tail -F /var/log/test
   middle2:
-    image: centos:7
+    build: centos7_with_ssh/.
     links: 
     - backend
+    expose:
+    - "22"
+    container_name: middle2
+    # command: tail -F /var/log/test
   backend:
-    image: centos:7
-
-
+    build: centos7_with_ssh/.
+    expose:
+    - "22"
+    container_name: backend
+    # command: tail -F /var/log/test
+# volumes:
+#   playbook:
+#     external: true

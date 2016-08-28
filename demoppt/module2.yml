@@ -1,0 +1,11 @@
+- name: Install packages
+  yum: name= "httpd"
+       state= present
+  with_items: 
+  - "netcat"
+  - "htop"
+  - "make"
+  - "zabbix-agent"
+  - "iotop"
+  - "ngrep"
+  - "glances"

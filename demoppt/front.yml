@@ -1,0 +1,5 @@
+---
+
+- hosts: front
+  roles:
+     - apache_httpd

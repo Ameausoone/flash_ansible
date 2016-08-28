@@ -1,0 +1,9 @@
+FROM ansible/centos7-ansible
+
+COPY playbook /playbook
+
+RUN yum install -y sshpass nc
+
+EXPOSE 8080
+
+
