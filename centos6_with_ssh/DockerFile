@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:6.8
 
 RUN yum install -y openssh-server
 RUN mkdir /var/run/sshd
@@ -13,6 +13,8 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 RUN /usr/bin/ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa && ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa
+
+RUN sed -i '/nodocs/d' /etc/yum.conf
 
 RUN yum makecache
 

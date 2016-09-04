@@ -1,6 +1,13 @@
 ---
 
 - hosts: zabbixserver
+  tasks: 
+    - name: Install Epel
+      yum: name=epel-release
+           state=present
+
+- hosts: zabbixserver
   roles:
     - ansible-role-apache-master
+    - ansible-role-php-master
     - ansible-zabbix-server-master

@@ -1,39 +1,24 @@
 version: '2'
 services:
-  # git:
-  #   image: unixtastic/git-ssh-server
+  # ci:
+  #   image: jenkins:2.7.2
+  #   links:
+  #   - ansible
   #   ports:
-  #   # - "443:443"
-  #   - "2222:22"
-  #   volumes:
-  #   - .:/code
-  #   container_name: git
-  ci:
-    image: jenkins:2.7.2
-    links:
-    - ansible
-    ports:
-    - "8080:8080"
-    container_name: ci
+  #   - "8080:8080"
+  #   container_name: ci
   ansible:
     build: ansible/.
     links:
-    # - git
-    # - load
     - front
     - zabbixserver
-    - zabbixweb
     - backend
-    # image: ansible/centos7-ansible
-    # volumes:
-    # - playbook:/playbook
     command: tail -F /var/log/test
     container_name: ansible
   front:
     build: centos6_with_ssh/.
     links: 
     - zabbixserver
-    - zabbixweb
     expose:
     - "22"
     ports:
@@ -45,18 +30,10 @@ services:
     - backend
     expose:
     - "22"
-    container_name: zabbixserver
-    # command: tail -F /var/log/test
-  zabbixweb:
-    build: centos6_with_ssh/.
-    links: 
-    - backend
-    expose:
-    - "22"
-    - "8081"
+    - "80"
     ports:
-    - "8081:8081"
-    container_name: zabbixweb
+    - "8081:80"
+    container_name: zabbixserver
     # command: tail -F /var/log/test
   backend:
     build: centos6_with_ssh/.

@@ -1,5 +1,15 @@
 # MAJ le playbook
-docker cp . ansible:/playbook
+ while [[ 1 ]]; do docker cp . ansible:/playbook; sleep 10 ; done
 
 # se connecter sur ansible avec des couleurs 
 docker exec -it ansible env TERM=xterm /bin/bash
+
+# Start container an recreate them
+docker-compose.exe up --build
+
+
+# command ansible
+ansible-playbook back.yml --diff -v
+ansible-playbook middle.yml --diff -v
+
+ansible-playbook back.yml && ansible-playbook middle.yml --diff -v

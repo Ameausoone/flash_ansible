@@ -1,5 +1,8 @@
 ---
 
+apache_create_vhosts: false
+php_opcache_enable: false
+
 server_dbhost: backend
 server_dbname: zabbix
 server_dbuser: zabbix
@@ -8,3 +11,5 @@ server_dbpassword: zabbix
 zabbix_url: zabbix.dj-wasabi.nl
 database_type: mysql
 database_type_long: mysql
+
+zabbix_version: 2.4
