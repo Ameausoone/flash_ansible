@@ -6,11 +6,11 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '14.04'
 
 - name: Add configuration
-  template: src={{ mysql_conf_tpl }} 
-  			dest={{ mysql_conf_dir[ansible_distribution] }}/{{ mysql_conf_file }} 
-  			owner=root 
-  			group=root 
-  			mode=0644
+  template: src="{{ mysql_conf_tpl }}"
+            dest={{ mysql_conf_dir[ansible_distribution] }}/{{ mysql_conf_file }}
+            owner=root 
+            group=root 
+            mode=0644
   when: mysql_conf_tpl != 'change_me'
   notify: restart mysql
 

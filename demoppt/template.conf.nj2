@@ -1,0 +1,21 @@
+# ServerRoot: The top of the directory tree
+ServerRoot "{{ httpd_ServerRoot }}"
+...
+
+# PidFile: process identification
+PidFile {{ httpd_PidFile }}
+...
+
+#Listen 12.34.56.78:80
+Listen {{ httpd_Listen }}
+...
+
+# LoadModule foo_module modules/mod_foo.so
+{% for v in httpd_LoadModules %}
+LoadModule {{ v }}_module modules/mod_{{ v }}.so
+{% endfor %}
+...
+
+{% if http_SSL == true %}
+LoadModule ssl_module modules/mod_ssl.so
+{% endif %}

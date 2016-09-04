@@ -2,4 +2,4 @@
 
 - hosts: backend
   roles:
-     - ansible-role-mariadb-master
+     - mysql-master

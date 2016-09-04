@@ -1,0 +1,6 @@
+---
+
+- hosts: zabbixserver
+  roles:
+    - ansible-role-apache-master
+    - ansible-zabbix-server-master

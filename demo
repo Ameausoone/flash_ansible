@@ -1,0 +1,17 @@
+.
+|-- defaults
+    `-- main.yml
+|-- files
+    `-- epel.key
+|-- handlers
+    `-- main.yml
+|-- tasks
+    `-- file_system.yml
+    `-- nginx.yml
+    `-- main.yml
+    `-- plugins.yml
+    `-- repo.yml
+|-- templates
+    `-- main.yml
+|-- vars
+    `-- main.yml

@@ -1,0 +1,5 @@
+# MAJ le playbook
+docker cp . ansible:/playbook
+
+# se connecter sur ansible avec des couleurs 
+docker exec -it ansible env TERM=xterm /bin/bash

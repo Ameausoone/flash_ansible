@@ -1,14 +1,8 @@
-
-[load]
-load	ansible_user=root	ansible_ssh_pass=root
-
 [front]
-front1	ansible_user=root	ansible_ssh_pass=root
-front2	ansible_user=root	ansible_ssh_pass=root
+front	ansible_user=root	ansible_ssh_pass=root
 
-[middle]
-middle1	ansible_user=root	ansible_ssh_pass=root
-middle2	ansible_user=root	ansible_ssh_pass=root
+[zabbixserver]
+zabbixserver	ansible_user=root	ansible_ssh_pass=root
 
 [backend]
 backend	ansible_user=root	ansible_ssh_pass=root

@@ -1,13 +1,13 @@
 version: '2'
 services:
-  git:
-    image: unixtastic/git-ssh-server
-    ports:
-    # - "443:443"
-    - "2222:22"
-    volumes:
-    - .:/code
-    container_name: git
+  # git:
+  #   image: unixtastic/git-ssh-server
+  #   ports:
+  #   # - "443:443"
+  #   - "2222:22"
+  #   volumes:
+  #   - .:/code
+  #   container_name: git
   ci:
     image: jenkins:2.7.2
     links:
@@ -18,66 +18,53 @@ services:
   ansible:
     build: ansible/.
     links:
-    - git
-    - load
-    - front1
-    - front2
-    - middle1
-    - middle2
+    # - git
+    # - load
+    - front
+    - zabbixserver
+    - zabbixweb
     - backend
     # image: ansible/centos7-ansible
     # volumes:
     # - playbook:/playbook
     command: tail -F /var/log/test
     container_name: ansible
-  load:
-    # image: centos:7
-    build: centos7_with_ssh/.
+  front:
+    build: centos6_with_ssh/.
     links: 
-    - front1
-    - front2
-    # command: tail -F /var/log/test
+    - zabbixserver
+    - zabbixweb
     expose:
     - "22"
-    container_name: load
-  front1:
-    build: centos7_with_ssh/.
-    links: 
-    - middle1
-    - middle2
-    expose:
-    - "22"
-    # command: tail -F /var/log/test
-    container_name: front1
-  front2:
-    build: centos7_with_ssh/.
-    links: 
-    - middle1
-    - middle2
-    expose:
-    - "22"
-    container_name: front2
-    # command: tail -F /var/log/test
-  middle1:
-    build: centos7_with_ssh/.
+    ports:
+    - "80:80"
+    container_name: front
+  zabbixserver:
+    build: centos6_with_ssh/.
     links: 
     - backend
     expose:
     - "22"
-    container_name: middle1
+    container_name: zabbixserver
     # command: tail -F /var/log/test
-  middle2:
-    build: centos7_with_ssh/.
+  zabbixweb:
+    build: centos6_with_ssh/.
     links: 
     - backend
     expose:
     - "22"
-    container_name: middle2
+    - "8081"
+    ports:
+    - "8081:8081"
+    container_name: zabbixweb
     # command: tail -F /var/log/test
   backend:
-    build: centos7_with_ssh/.
+    build: centos6_with_ssh/.
     expose:
     - "22"
+    - "3306"
+    ports:
+    - "3306:3306"
     container_name: backend
     # command: tail -F /var/log/test
 # volumes:
