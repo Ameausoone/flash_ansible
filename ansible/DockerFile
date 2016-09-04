@@ -4,6 +4,6 @@ COPY playbook /playbook
 
 RUN yum install -y sshpass nc
 
+RUN pip install zabbix-api
+
 EXPOSE 8080
-
-

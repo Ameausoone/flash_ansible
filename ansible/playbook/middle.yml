@@ -7,6 +7,8 @@
            state=present
 
 - hosts: zabbixserver
+  vars:
+    zabbix_url: localhost
   roles:
     - ansible-role-apache-master
     - ansible-role-php-master

@@ -11,5 +11,7 @@ docker-compose.exe up --build
 # command ansible
 ansible-playbook back.yml --diff -v
 ansible-playbook middle.yml --diff -v
+ansible-playbook front.yml --diff -v
 
-ansible-playbook back.yml && ansible-playbook middle.yml --diff -v
+
+ansible-playbook back.yml && ansible-playbook middle.yml && ansible-playbook front.yml && ansible-playbook agents.yml

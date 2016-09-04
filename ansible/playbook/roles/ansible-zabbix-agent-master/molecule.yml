@@ -1,0 +1,25 @@
+---
+ansible:
+  playbook: playbook.yml
+  timeout: 30
+
+docker:
+  containers:
+  - name: zabbix-agent-centos
+    ansible_groups:
+      - group1
+    image: milcom/centos7-systemd
+    image_version: latest
+    privileged: True
+  - name: zabbix-agent-debian
+    ansible_groups:
+      - group2
+    image: maint/debian-systemd
+    image_version: latest
+    privileged: True
+  - name: zabbix-agent-ubuntu
+    ansible_groups:
+      - group2
+    image: rastasheep/ubuntu-sshd
+    image_version: latest
+    privileged: True

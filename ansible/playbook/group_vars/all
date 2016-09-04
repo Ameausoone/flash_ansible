@@ -1,1 +1,15 @@
 
+
+agent_server: zabbixserver
+agent_serveractive: zabbixserver
+zabbix_api_use: true
+zabbix_api_user: admin
+zabbix_api_pass: zabbix
+zabbix_create_host: present
+zabbix_host_groups:
+  - Linux Servers
+zabbix_link_templates:
+  - Template OS Linux
+
+zabbix_api_create_hostgroup: True
+zabbix_api_create_hosts: True

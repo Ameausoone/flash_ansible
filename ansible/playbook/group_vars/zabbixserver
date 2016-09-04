@@ -8,7 +8,7 @@ server_dbname: zabbix
 server_dbuser: zabbix
 server_dbpassword: zabbix
 
-zabbix_url: zabbix.dj-wasabi.nl
+# 
 database_type: mysql
 database_type_long: mysql
 
