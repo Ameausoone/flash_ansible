@@ -1,0 +1,17 @@
+- name: Ensure nginx is started and enabled to start at boot.
+  service: name=nginx state=started enabled=yes
+
+- name: Ensure Apache is installed on Debian.
+  apt: "name={{ item }} state=installed"
+  with_items: 
+    - apache2
+    - apache2-utils
+
+- name: "MySQL | Create database"
+  mysql_db: name=database
+            state=present
+
+- name: "Configure zabbix-server"
+  template: src=zabbix_server.conf.j2
+            dest=/etc/zabbix/zabbix_server.conf
+

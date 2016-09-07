@@ -1,3 +1,5 @@
+playbooks
+roles
 .
 |-- defaults
     `-- main.yml
